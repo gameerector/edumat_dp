@@ -1,0 +1,219 @@
+@import "~@flaticon/flaticon-uicons/css/all/all";
+
+.main-container {
+    max-width: 720px;
+    margin: auto;
+}
+
+.carousel {
+    position: relative;
+    background: whitesmoke;
+    padding: 4px;
+    border-radius: 2px;
+}
+.carousel-indicators {
+    position: relative !important;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    padding: 6px 0;
+    margin-top: 10px;
+    background: #efefef;
+    width: 100%;
+    margin-left: 0 !important;
+}
+
+.carousel-indicators .img-thumbnail {
+    transition: transform 0.2s ease, border 0.2s ease;
+  }
+  
+  .carousel-indicators .img-thumbnail:hover {
+    transform: scale(1.1);
+    border-color: #0056b3;
+  }
+  
+  .carousel-indicators-wrapper {
+    position: relative;
+    width: 100%;
+    background: #efefef;
+    padding: 2px 0;
+  }
+  
+  .carousel-indicators {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: thin; /* For Firefox */
+    scroll-behavior: smooth;
+  }
+  
+/* Target the scrollable container */
+.carousel-indicators-wrapper {
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* For Firefox */
+  }
+  
+  /* WebKit-based browsers */
+  .carousel-indicators-wrapper::-webkit-scrollbar {
+    width: 6px; /* Thin scrollbar */
+    height: 6px; /* Thin horizontal scrollbar */
+    background-color: red;
+    color: red;
+}
+  
+  .carousel-indicators-wrapper::-webkit-scrollbar-thumb {
+    background: red !important; /* Semi-transparent thumb */
+    border-radius: 10px !important;; /* Rounded corners for the thumb */
+
+  }
+  
+  .carousel-indicators-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5) !important;; /* Slightly darker thumb on hover */
+    border-radius: 10px !important;;
+
+  }
+  
+  .carousel-indicators-wrapper::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track */
+  }
+  
+  /* Additional hover effect for better accessibility */
+  .carousel-indicators-wrapper:hover::-webkit-scrollbar-thumb {
+    background: red; /* Darker thumb when scrolling */
+    border-radius: 10px !important;;
+
+  }  
+  .indicator-thumbnail {
+    transition: border 0.3s ease, transform 0.3s ease;
+  }
+  
+  .indicator-thumbnail:hover {
+    transform: scale(1.1);
+  }
+  
+  .indicator-thumbnail.active {
+    border: 2px solid #007bff !important;
+  }
+.carousel-control-next, .carousel-control-prev {
+  height: 50px;
+  width: 26px;
+  background: #00000030;
+  border-radius: 4px;
+  position: absolute;
+  margin: auto;
+}
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 3px;
+}
+.tutor-section {
+  margin-bottom: 23px;
+}
+.card-body {
+  padding: 4px !important;
+  background: #ffc10743;
+  border-radius: 0 6px 6px 0;
+  height: 100%;
+  width: 100%;
+  flex: 1 1;
+
+}
+
+.tutor-section .card {
+  display: flex;
+  align-items: center;
+  flex-direction: row; /* Ensures image and text are side by side */
+
+}
+
+.tutor-section .card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px 0px 0px 6px;
+  background: #ffefbe;
+}
+
+@media (max-width: 768px) {
+  .tutor-section .card {
+      flex-direction: row; /* Keep the row layout on mobile */
+  }
+
+  .tutor-section .card img {
+      width: 60px; /* Slightly smaller image for mobile */
+      height: 60px;
+  }
+
+  .tutor-section .card-body h5 {
+      font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .tutor-section .card-body p {
+      font-size: 0.9rem; /* Smaller font for descriptions */
+  }
+  .card-body {
+    padding: 5px;
+  }
+  .tutor-details-s {
+    width: 100%;
+}
+
+}
+@media (max-width: 768px) { /* Adjust the max-width as needed for your breakpoint */
+  button.carousel-control-next, 
+  button.carousel-control-prev {
+    display: none;
+  }
+}
+
+p.card-text.text-muted {
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 254px;
+  text-wrap-mode: nowrap;
+}
+.tutor-section {
+  margin-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 20px;
+}
+
+.tutor-follow-btn{
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 20px;
+  position: absolute;
+  right: 0;
+  border: blue 3px solid;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  color: blue;
+
+}
+.slides-info {
+  font-size: 12px;
+  color: #4d4d4d;
+  padding: 4px 2px;
+  display: flex;
+  justify-content: space-between;
+}
+button.spk-audio-btn {
+  background: #e3e3e3;
+  border: none;
+  border-radius: 20px;
+  height: 25px;
+  width: 25px;
+  font-size: 14px;
+  padding: 4px 4px;
+  color: #515151;
+}
+button.carousel-control-next, button.carousel-control-prev {
+  background: #80808075;
+  width: 40px;
+  height: 76px;
+}
