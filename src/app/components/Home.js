@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { database } from "../../firebase"; // Adjust the path as per your project structure
 import { ref, onValue } from "firebase/database";
 import "./style-home.css";
-import Image from 'next/image';
 
 export default function Home() {
   const [topics, setTopics] = useState([]);
@@ -92,10 +91,10 @@ export default function Home() {
             {topics.slice(0, 4).map((topic) => ( // Limit to 4 cards per row
               <div className="col-md-3 col-sm-6" key={topic.id}>
                 <div className="card custom-card">
-                  <Image
+                  <img
                     src={topic.topicImages[0]?.url || "https://via.placeholder.com/300x200"}
                     className="card-img-top custom-card-img"
-                    alt={topic.topicImages[0]?.altText || "Topic Image"}
+                    alt={topic.topicImages[0]?.altText || "Topic img"}
                   />
                   <div className="card-body">
                   <h5 className="card-title">

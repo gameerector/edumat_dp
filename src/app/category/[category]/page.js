@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/style-home.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Image from 'next/image';
 
 // Utility function to convert slugs back to readable text
 const deslugify = (slug) => slug.replace(/-/g, " ");
@@ -49,7 +48,7 @@ export default function CategoryPage({ params }) {
           {topics.map((topic) => (
             <div className="col-md-3 col-sm-6" key={topic.id}>
               <div className="card custom-card">
-                <Image
+                <img
                   src={
                     topic.topicImages[0]?.url || "https://via.placeholder.com/300x200"
                   }

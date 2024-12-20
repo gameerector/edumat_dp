@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../components/style-home.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Image from 'next/image';
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
@@ -48,10 +47,11 @@ export default function SearchPage() {
             {topics.map((topic) => (
               <div className="col-md-3 col-sm-6" key={topic.id}>
                 <div className="card custom-card">
-                  <Image
+                  <img
                     src={topic.topicImages?.[0]?.url || "https://via.placeholder.com/300x200"}
                     className="card-img-top custom-card-img"
-                    alt={topic.topicImages?.[0]?.altText || "Topic Image"}
+                    alt={topic.topicImages?.[0]?.altText || "Topic Image"} 
+                    layout="intrinsic"
                   />
                   <div className="card-body">
                     <h5 className="card-title">

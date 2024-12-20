@@ -11,7 +11,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import "../../../style/topic-page.css";
-import Image from 'next/image';
 
 export default function TopicPage({ params }) {
     const { category, topic: topicSlug } = params; // Extract category and topic slug
@@ -85,7 +84,7 @@ export default function TopicPage({ params }) {
                         {tutorData ? (
                             <div className="card  border-0">
                                     <div className="col-md-1">
-                                        <Image
+                                        <img
                                             src={tutorData.profileImageUrl || "https://via.placeholder.com/150"}
                                             alt={tutorData.name || "Tutor Image"}
                                             className="img-fluid rounded-start"
@@ -131,7 +130,7 @@ export default function TopicPage({ params }) {
                                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                                     key={index}
                                 >
-                                    <Image
+                                    <img
                                         src={image.url || "https://via.placeholder.com/800x400"}
                                         className="d-block w-100"
                                         alt={image.altText || `Slide ${index + 1}`}
@@ -177,7 +176,7 @@ export default function TopicPage({ params }) {
                                 }}
                             >
                                 {topicImages.map((image, index) => (
-                                    <Image
+                                    <img
                                         key={index}
                                         src={image.url || "https://via.placeholder.com/100x60"}
                                         alt={image.altText || `Preview of Slide ${index + 1}`}
