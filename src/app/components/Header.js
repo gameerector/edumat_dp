@@ -24,11 +24,12 @@ export default function Header() {
     <header className="custom-header">
       <div className="container header-content">
         {/* Brand Section */}
-        <div className="brand">
+        <a href="/" className="brand">
+          <img src="/edumatlogo.png" alt="Edumat Logo"  />
           <h1 className="brand-name">
             EduMat<span className="highlight">.in</span>
           </h1>
-        </div>
+        </a>
 
         {/* Search Section */}
         <div className="search-container">

@@ -42,7 +42,7 @@ export async function generateMetadata({ params }) {
                 openGraph: {
                     title: `${topic.topicName} by ${tutorName} on Edumat`,
                     description: topic.description,
-                    url: `https://edumat.in/category/${params.category}/${topicSlug}`, // Update with your actual URL
+                    url: `https://www.edumat.in/category/${params.category}/${topicSlug}`, // Update with your actual URL
                     siteName: "Edumat",
                     images: [
                         {
