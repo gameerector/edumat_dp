@@ -10,6 +10,7 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [tutors, setTutors] = useState({});
+  const [isNavbarHidden, setIsNavbarHidden] = useState(false);
 
   useEffect(() => {
     const fetchTutors = async () => {
@@ -45,6 +46,24 @@ export default function Home() {
     fetchTopics();
   }, []);
 
+  // Scroll detection
+useEffect(() => {
+  let lastScrollTop = 0;
+
+  const handleScroll = () => {
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+      setIsNavbarHidden(true); // Scrolling down
+    } else {
+      setIsNavbarHidden(false); // Scrolling up
+    }
+    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   const groupedTopics =
     selectedCategory === "all"
       ? categories.map((category) => ({
@@ -64,7 +83,7 @@ export default function Home() {
 
   return (
     <div className="container-main-home">
-      <div className="tag-topics-ct">
+      <div className={`tag-topics-ct ${isNavbarHidden ? "hidden" : ""}`}>
         <button
           className={`btn tag-btn-c ${
             selectedCategory === "all" ? "selected" : ""
@@ -98,7 +117,7 @@ export default function Home() {
                 )}`)
               }
             >
-              More
+              More Topics
             </button>
           </div>
           <div className="cards-container">
@@ -106,9 +125,12 @@ export default function Home() {
                 <a
                   href={`/category/${encodeURIComponent(
                     category
-                  )}/${encodeURIComponent(
-                    topic.topicName.toLowerCase().replace(/ /g, "-")
-                  )}`}
+                  )}/${topic.topicName
+                    .toLowerCase()
+                    .replace(/ /g, "-")
+                    .replace(/&/g, "&") // Temporarily replace & with a unique placeholder
+                    .replace(/%26/g, "&") // Convert %26 back to & after encoding
+                  }`}                
                   key={topic.id}
                   className="card"
                   style={{

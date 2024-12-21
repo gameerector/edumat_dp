@@ -220,3 +220,8 @@ button.carousel-control-next, button.carousel-control-prev {
   height: 76px;
   
 }
+h1.content-title {
+  margin-top: 70px;
+  font-size: 32px;
+  color: black;
+}

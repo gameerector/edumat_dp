@@ -19,22 +19,25 @@ export default function TopicPage({ params }) {
 
     useEffect(() => {
         const topicsRef = ref(database, "topics");
-
+    
         onValue(topicsRef, (snapshot) => {
             const data = snapshot.val();
-
+    
             if (data) {
+                // Decode the topicSlug here
+                const decodedTopicSlug = decodeURIComponent(topicSlug);
+    
                 // Match topic by slug
                 const topic = Object.values(data).find((t) =>
                     t.topicName
                         .toLowerCase()
                         .replace(/ /g, "-")
-                        .includes(topicSlug)
+                        .includes(decodedTopicSlug) // Use the decoded topicSlug
                 );
-
+    
                 if (topic) {
                     setTopicData(topic);
-
+    
                     // Fetch tutor data based on tutorId
                     if (topic.tutorId) {
                         const tutorRef = ref(database, `tutors/${topic.tutorId}`);
@@ -46,6 +49,7 @@ export default function TopicPage({ params }) {
             }
         });
     }, [topicSlug]);
+    
 
         // Speak the altText of the active slide
         const speakAltText = () => {
@@ -69,7 +73,7 @@ export default function TopicPage({ params }) {
             <div className="main-container">
                 <div className="container my-5">
                     <div className="content-header mb-4">
-                            <h1 className="content-title fw-bold text-primary">{topicName}</h1>
+                            <h1 className="content-title">{topicName}</h1>
                             <p className="content-meta text-muted small">
                                 {new Date(topicData.uploadDate).toLocaleDateString("en-US", {
                                     month: "long",
@@ -134,6 +138,7 @@ export default function TopicPage({ params }) {
                                         src={image.url || "https://via.placeholder.com/800x400"}
                                         className="d-block w-100"
                                         alt={image.altText || `Slide ${index + 1}`}
+                                        loading='lazy'
                                     />
                                 </div>
                             ))}

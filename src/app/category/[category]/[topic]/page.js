@@ -13,10 +13,16 @@ export async function generateMetadata({ params }) {
     const data = snapshot.val();
 
     if (data) {
-        // Find the topic by slug
-        const topic = Object.values(data).find((t) =>
-            t.topicName.toLowerCase().replace(/ /g, "-").includes(topicSlug)
-        );
+                // Decode the topicSlug here
+                const decodedTopicSlug = decodeURIComponent(topicSlug);
+    
+                // Match topic by slug
+                const topic = Object.values(data).find((t) =>
+                    t.topicName
+                        .toLowerCase()
+                        .replace(/ /g, "-")
+                        .includes(decodedTopicSlug) // Use the decoded topicSlug
+                );
 
         if (topic) {
             // Fetch the tutor data based on tutorId
