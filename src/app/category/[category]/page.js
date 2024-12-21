@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { database } from "../../../firebase"; // Adjust the path as needed
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, get } from "firebase/database";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../components/style-home.css";
 import Header from "../../components/Header";
@@ -15,12 +15,19 @@ const deslugify = (slug) => slug.replace(/-/g, " ");
 export default function CategoryPage({ params }) {
   const { category } = params; // Get the category slug from the dynamic route
   const [topics, setTopics] = useState([]);
-
+  const [tutors, setTutors] = useState({});
+  
   // Convert the slug to its original format
   const decodedCategory = deslugify(category);
 
-  // Fetch topics based on the category
+  // Fetch topics and tutors based on the category
   useEffect(() => {
+    const fetchTutors = async () => {
+      const tutorsRef = ref(database, "tutors");
+      const snapshot = await get(tutorsRef);
+      setTutors(snapshot.val() || {});
+    };
+
     const topicsRef = ref(database, "topics");
     onValue(topicsRef, (snapshot) => {
       const data = snapshot.val();
@@ -37,6 +44,8 @@ export default function CategoryPage({ params }) {
         setTopics(topicsArray);
       }
     });
+
+    fetchTutors();
   }, [decodedCategory]);
 
   return (
@@ -44,37 +53,42 @@ export default function CategoryPage({ params }) {
       <Header />
       <div className="container my-5">
         <h1 className="text-capitalize mb-4">{decodedCategory} Topics</h1>
-        <div className="row g-4">
-          {topics.map((topic) => (
-            <div className="col-md-3 col-sm-6" key={topic.id}>
-              <div className="card custom-card">
+        <div className="cards-container">
+          {topics.map((topic) => {
+            const tutorName = tutors[topic.tutorId]?.name || "Unknown Tutor";
+            return (
+              <a
+                href={`/category/${encodeURIComponent(
+                  category
+                )}/${encodeURIComponent(
+                  topic.topicName.toLowerCase().replace(/ /g, "-")
+                )}`}
+                key={topic.id}
+                className="card"
+                style={{
+                  backgroundImage: `url(${
+                    topic.topicImages[0]?.url ||
+                    "https://via.placeholder.com/360x210"
+                  })`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
                 <img
                   src={
-                    topic.topicImages[0]?.url || "https://via.placeholder.com/300x200"
+                    topic.topicImages[0]?.url ||
+                    "https://via.placeholder.com/360x210"
                   }
-                  className="card-img-top custom-card-img"
-                  alt={topic.topicImages[0]?.altText || "Topic Image"}
+                  alt={topic.topicImages[0]?.altText || "Topic img"}
+                  className="card-img"
                 />
-                <div className="card-body">
-                  <h5 className="card-title">
-                    <a
-                      href={`/category/${encodeURIComponent(
-                        category
-                      )}/${encodeURIComponent(
-                        topic.topicName.toLowerCase().replace(/ /g, "-")
-                      )}`}
-                      className="text-decoration-none text-dark"
-                    >
-                      {topic.topicName}
-                    </a>
-                  </h5>
-                  <p className="card-text text-truncate">
-                    {topic.description}
-                  </p>
+                <div className="card-content">
+                  <h5 className="card-title">{topic.topicName}</h5>
+                  <p className="card-text">{tutorName}</p>
                 </div>
-              </div>
-            </div>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
       <Footer />

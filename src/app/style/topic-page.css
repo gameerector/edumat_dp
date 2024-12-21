@@ -122,9 +122,11 @@
 }
 
 .tutor-section .card {
-  display: flex;
-  align-items: center;
-  flex-direction: row; /* Ensures image and text are side by side */
+  display: flex
+  ;
+      justify-content: space-around;
+      flex-direction: row;
+      width: 100%;
 
 }
 
@@ -216,4 +218,5 @@ button.carousel-control-next, button.carousel-control-prev {
   background: #80808075;
   width: 40px;
   height: 76px;
+  
 }

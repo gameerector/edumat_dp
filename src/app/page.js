@@ -10,7 +10,7 @@ export default function MainPage() {
   return (
     <div className='site'>
       <Header />
-      <main className="container my-4">
+      <main className="container-main-home">
         <Home />
       </main>
       <Footer />
